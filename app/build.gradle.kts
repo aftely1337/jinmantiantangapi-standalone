@@ -33,11 +33,11 @@ android {
 
 dependencies {
     // Tachiyomi dependencies
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
     compileOnly("com.github.keiyoushi:extensions-lib:v1.4.2.1")
-    compileOnly("com.squareup.okhttp3:okhttp:4.12.0")
+    compileOnly("com.squareup.okhttp3:okhttp:5.3.2")
     compileOnly("androidx.preference:preference-ktx:1.2.1")
-    compileOnly("com.github.tachiyomiorg:extensions-lib:1.5")
-    compileOnly("com.squareup.okhttp3:okhttp:4.12.0")
-    compileOnly("androidx.preference:preference-ktx:1.2.1")
+    compileOnly("io.reactivex:rxjava:1.3.8")
+    compileOnly("org.jsoup:jsoup:1.22.1")
+    compileOnly("com.google.code.gson:gson:2.10.1")
 }
