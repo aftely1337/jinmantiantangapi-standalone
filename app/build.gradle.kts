@@ -3,9 +3,6 @@ plugins {
     kotlin("android")
     kotlin("plugin.serialization")
 }
-    id("com.android.application")
-    kotlin("android")
-}
 
 android {
     namespace = "eu.kanade.tachiyomi.extension.zh.jinmantiantangapi"
