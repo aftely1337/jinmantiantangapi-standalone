@@ -1,0 +1,68 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build Extension APK
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+      
+      - name: Find APK
+        id: find_apk
+        run: |
+          APK_PATH=$(find build/outputs/apk/release -name "*.apk" -type f | head -n 1)
+          echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
+          echo "Found APK: $APK_PATH"
+          
+          # Get version from APK filename
+          APK_NAME=$(basename "$APK_PATH")
+          echo "apk_name=$APK_NAME" >> $GITHUB_OUTPUT
+      
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jinmantiantangapi-apk
+          path: ${{ steps.find_apk.outputs.apk_path }}
+          retention-days: 90
+      
+      - name: Upload to Release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ steps.find_apk.outputs.apk_path }}
+          asset_name: ${{ steps.find_apk.outputs.apk_name }}
+          asset_content_type: application/vnd.android.package-archive
+      
+      - name: Build Summary
+        run: |
+          echo "✅ Build completed successfully"
+          echo "📦 APK: ${{ steps.find_apk.outputs.apk_name }}"
+          echo "📍 Path: ${{ steps.find_apk.outputs.apk_path }}"
+          echo "📏 Size: $(du -h "${{ steps.find_apk.outputs.apk_path }}" | cut -f1)"
