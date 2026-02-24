@@ -34,6 +34,9 @@ android {
 dependencies {
     // Tachiyomi dependencies
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
+    compileOnly("com.github.keiyoushi:extensions-lib:v1.4.2.1")
+    compileOnly("com.squareup.okhttp3:okhttp:4.12.0")
+    compileOnly("androidx.preference:preference-ktx:1.2.1")
     compileOnly("com.github.tachiyomiorg:extensions-lib:1.5")
     compileOnly("com.squareup.okhttp3:okhttp:4.12.0")
     compileOnly("androidx.preference:preference-ktx:1.2.1")
