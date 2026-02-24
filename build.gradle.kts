@@ -14,13 +14,6 @@ plugins {
     kotlin("android") version "1.9.22" apply false
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://jitpack.io") }
-    }
-}
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)
