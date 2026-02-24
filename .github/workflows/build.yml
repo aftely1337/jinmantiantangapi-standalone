@@ -29,12 +29,12 @@ jobs:
         run: chmod +x gradlew
       
       - name: Build Release APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew :app:assembleRelease
       
       - name: Find APK
         id: find_apk
         run: |
-          APK_PATH=$(find build/outputs/apk/release -name "*.apk" -type f | head -n 1)
+          APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" -type f | head -n 1)
           echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
           echo "Found APK: $APK_PATH"
           
