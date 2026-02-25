@@ -82,8 +82,6 @@ class JinmantiantangApi : HttpSource(), ConfigurableSource {
         val page = response.request.url.queryParameter("page")?.toIntOrNull() ?: 1
         return apiClient.getCategoryFilter(page = page, sortBy = "mv")
     }
-        return apiClient.getCategoryFilter(page = 1, sortBy = "mv")
-    }
     
     // ==================== 最新更新 ====================
     
@@ -96,8 +94,6 @@ class JinmantiantangApi : HttpSource(), ConfigurableSource {
         // 从 URL 中提取页码
         val page = response.request.url.queryParameter("page")?.toIntOrNull() ?: 1
         return apiClient.getCategoryFilter(page = page, sortBy = "mr")
-    }
-        return apiClient.getCategoryFilter(page = 1, sortBy = "mr")
     }
     
     // ==================== 搜索 ====================
